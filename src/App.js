@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Example from './component/Home';
@@ -12,6 +12,9 @@ import myReducer from './reducer/UseReducer';
 import { createContext, useReducer } from 'react';
 import { StateContext } from './reducer/StateContext';
 import PasswordReset from './component/Sendotp';
+import Message from './component/Message';
+import CheckOTP from './component/CheckOTP';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -41,10 +44,11 @@ function App() {
             <Route path='/' element={<SignIn />} />
             <Route path="/trangchu" element={<Example />} />
 
-
+            <Route path='/inbox' element={<Message />} />
             <Route path='/dangky' element={<SignUp />} />
             <Route path='/chitiet' element={<ContentSide />} />
             <Route path='/test' element={<PasswordReset />} />
+            <Route path='/tuyensinh' element={<CheckOTP />} />
           </Routes>
         </StateContext>
       </UserContext.Provider>

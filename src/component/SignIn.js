@@ -174,6 +174,9 @@ export default function SignIn() {
                   <Link to='/test' className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Quên Mật Khẩu
                   </Link>
+                  <Link to='/tuyensinh' className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Tuyen Sinh
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">

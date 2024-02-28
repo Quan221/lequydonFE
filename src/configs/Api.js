@@ -7,6 +7,14 @@ export let endpoints = {
     "current-user": "/users/current-user/",
     "login": "/o/token/",
     "thongbao": "/thongbao/",
+    'tintuc': '/tintuc/2/',
+    "my-message": '/myInbox/',
+    "quan": "/quan/",
+    "phuong": (quanId) => `/quan/${quanId}/phuong/`,
+    "dontuyensinh": "/dontuyensinh/",
+    "trinhdo": "/trinhdo/",
+    "truong": (quanId) => `/quan/${quanId}/truong/`,
+    "chonlop": '/dangkyhoc/',
 
 
 

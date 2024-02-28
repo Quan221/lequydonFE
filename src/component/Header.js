@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Dialog, Disclosure, Menu, Popover, Transition } from '@headlessui/react'
 import { useStateContext } from '../reducer/StateContext';
 
@@ -42,6 +42,7 @@ export default function Header() {
     dispatch({ "type": "logout" })
     localStorage.clear()
   }
+
 
   return (
     <header className="bg-white  ">

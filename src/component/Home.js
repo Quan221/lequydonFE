@@ -1,6 +1,7 @@
-import { Fragment, useContext, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
-
+import DOMPurify from 'dompurify'
+import ReactHtmlParser from 'react-html-parser'
 import { Switch } from '@headlessui/react'
 import {
   ArrowPathIcon,
@@ -15,6 +16,7 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon, CloudArrowUpIcon, LockClose
 import { Link } from 'react-router-dom'
 import { UserContext } from '../App'
 import Errors from './Error'
+import Api, { authApi, endpoints } from '../configs/Api'
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -59,14 +61,34 @@ export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [agreed, setAgreed] = useState(false)
   const [open, setOpen] = useState(true)
+  const [tintuc, setTintuc] = useState('')
+  const [message, setMessage] = useState([])
 
   const [user, dispatch] = useContext(UserContext)
+
+  useEffect(() => {
+    const loadContent = async () => {
+      let res = await Api.get(endpoints['tintuc'])
+      setTintuc(res.data.description)
+      let res2 = await authApi().get('http://127.0.0.1:8000/my-inbox/1/')
+      setMessage(res2.data)
+    }
+
+    loadContent()
+
+  }, [])
+  console.log(message)
+  const sanitizedContent = DOMPurify.sanitize(tintuc);
   let btn = <>
     <Errors />
 
   </>
   if (user != null) {
     btn = <>
+      {/* <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} /> */}
+      <div>
+        {ReactHtmlParser(tintuc)}
+      </div>
 
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -92,7 +114,7 @@ export default function Example() {
                 </div>
                 <div className="group relative">
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                    <Link to='/chitiet'>
+                    <Link to='/inbox'>
                       <span className="absolute inset-0" />
                       {post.title}
                     </Link>
